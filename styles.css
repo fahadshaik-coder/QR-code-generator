@@ -120,12 +120,25 @@ img {
   flex-wrap: wrap;
 }
 
-.generator-form input[type="text"],
+.generator-form input[type="text"] {
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: #fdf8f5;
+  color: var(--text);
+  outline: none;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  flex: 1 1 280px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 .generator-form input[type="file"],
 .generator-form input[type="range"] {
   padding: 0.8rem 1rem;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 0.75rem;
   background: #fdf8f5;
   color: var(--text);
   outline: none;
@@ -136,10 +149,6 @@ img {
 .generator-form input[type="text"]:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(217, 122, 147, 0.15);
-}
-
-.generator-form input[type="text"] {
-  flex: 1 1 280px;
 }
 
 .generator-form input[type="file"] {
@@ -536,9 +545,85 @@ img {
   font-size: 0.92rem;
 }
 
-@media (max-width: 800px) {
+/* ==========================================
+   RESPONSIVE DESIGN & MEDIA QUERIES
+   ========================================== */
 
-  .hero-grid,
+/* --- Desktop Sticky Preview (min-width: 992px) --- */
+@media (min-width: 992px) {
+  .hero-grid {
+    align-items: start;
+  }
+
+  .hero-card {
+    position: sticky;
+    top: 2rem;
+  }
+}
+
+/* --- Laptop & Medium Screens (max-width: 1024px) --- */
+@media (max-width: 1024px) {
+  .container {
+    width: min(100%, calc(100% - 2.5rem));
+  }
+
+  .hero-grid {
+    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* --- Tablets & Medium Devices (max-width: 991px) --- */
+@media (max-width: 991px) {
+  .hero {
+    padding: 1rem 0 3rem;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .hero-card {
+    position: relative;
+    top: 0;
+    max-width: 520px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .cta-box {
+    padding: 1.5rem;
+  }
+}
+
+/* --- Small Tablets & Large Phones (max-width: 768px) --- */
+@media (max-width: 768px) {
+  .container {
+    width: min(100%, calc(100% - 1.75rem));
+  }
+
+  .top-nav {
+    padding: 0.8rem 0 1.5rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.75rem, 5vw, 2.4rem);
+  }
+
+  .hero-text {
+    font-size: 0.98rem;
+  }
+
   .card-grid {
     grid-template-columns: 1fr;
   }
@@ -546,26 +631,105 @@ img {
   .cta-box {
     flex-direction: column;
     align-items: flex-start;
-  }
-}
-
-@media (max-width: 560px) {
-  .top-nav {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
+    gap: 1.25rem;
+    text-align: left;
   }
 
-  .text-input-row,
-  .form-actions,
-  .control-grid {
-    grid-template-columns: 1fr;
-    flex-direction: column;
-  }
-
-  .generator-form button,
   .cta-button {
     width: 100%;
     text-align: center;
+  }
+}
+
+/* --- Mobile Devices (max-width: 640px) --- */
+@media (max-width: 640px) {
+  .control-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  .text-input-row {
+    flex-direction: column;
+  }
+
+  .text-input-row input[type="text"],
+  .text-input-row button {
+    width: 100%;
+  }
+
+  .generator-form {
+    padding: 1.1rem;
+    border-radius: 1rem;
+  }
+
+  .generator-form input[type="text"],
+  .generator-form input[type="file"],
+  .generator-form input[type="range"] {
+    font-size: 1rem;
+    /* Prevents auto-zoom on mobile iOS */
+  }
+
+  .preset-badges {
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .preset-badges .preset-btn {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+
+  .preview-actions button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .footer-inner {
+    text-align: center;
+  }
+}
+
+/* --- Extra Small Mobile (max-width: 480px) --- */
+@media (max-width: 480px) {
+  .top-nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .nav-links {
+    gap: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .badge-row {
+    justify-content: center;
+  }
+
+  .color-input-wrapper {
+    justify-content: space-between;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .qr-window {
+    padding: 1.2rem 0.8rem;
+  }
+
+  .qr-code {
+    min-height: 180px;
   }
 }
