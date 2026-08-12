@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Create stylish QR codes for links, text, and contact details in seconds."
+    />
+    <title>QR Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <div class="container">
+        <nav class="top-nav">
+          <a class="brand" href="#">QR Studio</a>
+          <div class="nav-links">
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+          </div>
+        </nav>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="sub-title">Fast • Simple • Professional</p>
+            <h1>Create beautiful QR codes in seconds.</h1>
+            <p class="hero-text">
+              Turn URLs, plain text, and contact details into scannable QR codes for
+              business cards, product packaging, and social sharing.
+            </p>
+
+            <form class="generator-form">
+              <div class="text-input-row">
+                <input id="input" type="text" placeholder="Enter a URL or text" value="https://example.com" />
+                <button type="submit">Generate QR</button>
+              </div>
+
+              <div class="control-grid">
+                <div class="control-item">
+                  <span>Foreground Color</span>
+                  <div class="color-input-wrapper">
+                    <input type="color" id="color-dark" value="#3b2c2e" />
+                    <span id="color-dark-hex">#3B2C2E</span>
+                  </div>
+                </div>
+
+                <div class="control-item">
+                  <span>Background Color</span>
+                  <div class="color-input-wrapper">
+                    <input type="color" id="color-light" value="#fcf5f2" />
+                    <span id="color-light-hex">#FCF5F2</span>
+                  </div>
+                </div>
+
+                <div class="control-item full-width">
+                  <span>QR Code Size: <strong id="size-value">220px</strong></span>
+                  <input type="range" id="size-input" min="120" max="350" value="220" />
+                </div>
+
+                <div class="control-item full-width">
+                  <span>Center Logo / Image</span>
+                  <div class="file-upload-wrapper">
+                    <input type="file" id="image-input" accept="image/*" style="display: none;" />
+                    <button type="button" id="image-generate-btn" class="btn-secondary" style="width: 100%;">Upload Logo Image</button>
+                    <div id="image-preview-wrapper" class="image-preview-wrapper hidden">
+                      <img id="image-preview" src="" alt="Logo Preview" />
+                      <span id="image-filename"></span>
+                      <button type="button" id="remove-image-btn" class="btn-icon" title="Remove logo">&times;</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="color-presets">
+                <div class="preset-header">
+                  <span class="preset-label">Color Presets:</span>
+                  <span id="preset-active-name" class="preset-active-name">Rose Modern</span>
+                </div>
+                <div id="preset-badges" class="preset-badges">
+                  <button type="button" class="preset-btn active" data-dark="#3b2c2e" data-light="#fcf5f2" data-name="Rose Modern" title="Rose Modern" style="--p-dark: #3b2c2e; --p-light: #fcf5f2;"></button>
+                  <button type="button" class="preset-btn" data-dark="#000000" data-light="#ffffff" data-name="Classic Black" title="Classic Black" style="--p-dark: #000000; --p-light: #ffffff;"></button>
+                  <button type="button" class="preset-btn" data-dark="#1e3a8a" data-light="#eff6ff" data-name="Ocean Blue" title="Ocean Blue" style="--p-dark: #1e3a8a; --p-light: #eff6ff;"></button>
+                  <button type="button" class="preset-btn" data-dark="#065f46" data-light="#ecfdf5" data-name="Forest Emerald" title="Forest Emerald" style="--p-dark: #065f46; --p-light: #ecfdf5;"></button>
+                  <button type="button" class="preset-btn" data-dark="#581c87" data-light="#faf5ff" data-name="Royal Purple" title="Royal Purple" style="--p-dark: #581c87; --p-light: #faf5ff;"></button>
+                  <button type="button" class="preset-btn" data-dark="#7c2d12" data-light="#fff7ed" data-name="Sunset Amber" title="Sunset Amber" style="--p-dark: #7c2d12; --p-light: #fff7ed;"></button>
+                  <button type="button" class="preset-btn" data-dark="#831843" data-light="#fdf2f8" data-name="Neon Berry" title="Neon Berry" style="--p-dark: #831843; --p-light: #fdf2f8;"></button>
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="button" id="reset-btn" class="btn-secondary">Reset Colors &amp; Size</button>
+              </div>
+            </form>
+
+            <div class="badge-row">
+              <span>Free to use</span>
+              <span>Instant preview</span>
+            </div>
+          </div>
+
+          <div class="hero-card" aria-label="QR code preview">
+            <div id="qr-window" class="qr-window">
+              <div id="qr-code-container" class="qr-code"></div>
+              <p id="qr-status">Enter text to generate a QR code.</p>
+            </div>
+            <div class="preview-actions">
+              <button type="button" id="download-btn" class="btn-download">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+                Download PNG
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="features" class="features">
+        <div class="container">
+          <div class="section-heading">
+            <p class="eyebrow">Why choose us</p>
+            <h2>Everything you need for smarter sharing</h2>
+          </div>
+
+          <div class="card-grid">
+            <article class="feature-card">
+              <h3>Customizable</h3>
+              <p>Adjust colors, size, and style to match your brand.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Lightning fast</h3>
+              <p>Generate and download QR codes instantly without delays.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Works everywhere</h3>
+              <p>Perfect for menus, flyers, business cards, and digital campaigns.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="cta-section">
+        <div class="container cta-box">
+          <div>
+            <p class="eyebrow">Ready to begin?</p>
+            <h2>Make your next connection effortless.</h2>
+          </div>
+          <a href="#" class="cta-button">Start creating</a>
+        </div>
+      </section>
+    </main>
+
+    <footer id="contact" class="footer">
+      <div class="container footer-inner">
+        <p>© 2026 QR Studio. Built for modern digital sharing By Fahad Shaik.</p>
+      </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
